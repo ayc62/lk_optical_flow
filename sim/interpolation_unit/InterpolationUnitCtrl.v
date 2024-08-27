@@ -27,22 +27,22 @@ input logic pix_val,
 
 input  logic[4:0] col_counter,
 input  logic[4:0] row_counter,
-input  logic feature_val,
+// input  logic feature_val,
 
-output logic a_reg_en,
-output logic b_reg_en,
-output logic one_minus_a_reg_en,
-output logic one_minus_b_reg_en,
+// output logic a_reg_en,
+// output logic b_reg_en,
+// output logic one_minus_a_reg_en,
+// output logic one_minus_b_reg_en,
 
-output logic mul00_mux_sel,
-output logic mul01_mux_sel,
-output logic mul10_mux_sel,
-output logic mul11_mux_sel,
+// output logic mul00_mux_sel,
+// output logic mul01_mux_sel,
+// output logic mul10_mux_sel,
+// output logic mul11_mux_sel,
 
-output logic iw00_reg_en,
-output logic iw01_reg_en,
-output logic iw10_reg_en,
-output logic iw11_reg_en,
+// output logic iw00_reg_en,
+// output logic iw01_reg_en,
+// output logic iw10_reg_en,
+// output logic iw11_reg_en,
 
 output logic row_counter_en,
 output logic deq_rdy,
@@ -137,37 +137,37 @@ function void cs
     input logic cs_row_counter_en,
     input logic cs_deq_rdy,
     input logic cs_enq_val,
-    input logic cs_pix_interp_val_reg_in_1,
-    input logic cs_a_reg_en,
-    input logic cs_b_reg_en,
-    input logic cs_one_minus_a_reg_en,
-    input logic cs_one_minus_b_reg_en,
-    input logic cs_mul00_mux_sel,
-    input logic cs_mul01_mux_sel,
-    input logic cs_mul10_mux_sel,
-    input logic cs_mul11_mux_sel,
-    input logic cs_iw00_reg_en,
-    input logic cs_iw01_reg_en,
-    input logic cs_iw10_reg_en,
-    input logic cs_iw11_reg_en
+    input logic cs_pix_interp_val_reg_in_1
+    // input logic cs_a_reg_en,
+    // input logic cs_b_reg_en,
+    // input logic cs_one_minus_a_reg_en,
+    // input logic cs_one_minus_b_reg_en,
+    // input logic cs_mul00_mux_sel,
+    // input logic cs_mul01_mux_sel,
+    // input logic cs_mul10_mux_sel,
+    // input logic cs_mul11_mux_sel,
+    // input logic cs_iw00_reg_en,
+    // input logic cs_iw01_reg_en,
+    // input logic cs_iw10_reg_en,
+    // input logic cs_iw11_reg_en
 );
 begin
 row_counter_en = cs_row_counter_en;
 deq_rdy        = cs_deq_rdy;
 enq_val        = cs_enq_val;
 pix_interp_val_reg_in_1 = cs_pix_interp_val_reg_in_1;
-a_reg_en           = cs_a_reg_en;
-b_reg_en           = cs_b_reg_en;
-one_minus_a_reg_en = cs_one_minus_a_reg_en;
-one_minus_b_reg_en = cs_one_minus_b_reg_en;
-mul00_mux_sel      = cs_mul00_mux_sel;
-mul01_mux_sel      = cs_mul01_mux_sel;
-mul10_mux_sel      = cs_mul10_mux_sel;
-mul11_mux_sel      = cs_mul11_mux_sel;
-iw00_reg_en        = cs_iw00_reg_en;
-iw01_reg_en        = cs_iw01_reg_en;
-iw10_reg_en        = cs_iw10_reg_en;
-iw11_reg_en        = cs_iw11_reg_en;
+// a_reg_en           = cs_a_reg_en;
+// b_reg_en           = cs_b_reg_en;
+// one_minus_a_reg_en = cs_one_minus_a_reg_en;
+// one_minus_b_reg_en = cs_one_minus_b_reg_en;
+// mul00_mux_sel      = cs_mul00_mux_sel;
+// mul01_mux_sel      = cs_mul01_mux_sel;
+// mul10_mux_sel      = cs_mul10_mux_sel;
+// mul11_mux_sel      = cs_mul11_mux_sel;
+// iw00_reg_en        = cs_iw00_reg_en;
+// iw01_reg_en        = cs_iw01_reg_en;
+// iw10_reg_en        = cs_iw10_reg_en;
+// iw11_reg_en        = cs_iw11_reg_en;
 end
 endfunction
 

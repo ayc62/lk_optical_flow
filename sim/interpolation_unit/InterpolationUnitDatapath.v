@@ -26,29 +26,29 @@ input  logic        clk,
 input  logic        reset,
 input logic [4:0] win_dim,
 
-input logic [dec_width-1:0] feature_x_dec,
-input logic [dec_width-1:0] feature_y_dec,
-input logic feature_val,
+// input logic [dec_width-1:0] feature_x_dec,
+// input logic [dec_width-1:0] feature_y_dec,
+// input logic feature_val,
 input  logic [pix_width-1:0] pix,
 input logic pix_val,
 output logic [pix_interp_width-1:0] pix_interp,
 
 // datapath <-> ctrl
 
-input logic a_reg_en,
-input logic b_reg_en,
-input logic one_minus_a_reg_en,
-input logic one_minus_b_reg_en,
+// input logic a_reg_en,
+// input logic b_reg_en,
+// input logic one_minus_a_reg_en,
+// input logic one_minus_b_reg_en,
 
-input logic mul00_mux_sel,
-input logic mul01_mux_sel,
-input logic mul10_mux_sel,
-input logic mul11_mux_sel,
+// input logic mul00_mux_sel,
+// input logic mul01_mux_sel,
+// input logic mul10_mux_sel,
+// input logic mul11_mux_sel,
 
-input logic iw00_reg_en,
-input logic iw01_reg_en,
-input logic iw10_reg_en,
-input logic iw11_reg_en,
+// input logic iw00_reg_en,
+// input logic iw01_reg_en,
+// input logic iw10_reg_en,
+// input logic iw11_reg_en,
 
 output logic [4:0] row_counter,
 output logic [4:0] col_counter,
@@ -122,100 +122,100 @@ assign iw01 = {{dec_width-1{1'b0}}, 1'b1};
 assign iw10 = {{dec_width-1{1'b0}}, 1'b1};
 assign iw11 = {{dec_width-1{1'b0}}, 1'b1};
 
-logic [dec_width-1:0] a;
-logic [dec_width-1:0] b;
-logic [dec_width-1:0] one_minus_a;
-logic [dec_width-1:0] one_minus_b;
-logic a_reg_en, b_reg_en, one_minus_a_reg_en, one_minus_b_reg_en;
-vc_EnResetReg#(dec_width) a_reg
-(
-    .clk(clk),
-    .reset(reset),
-    .en(a_reg_en),
-    .d(feature_x_dec),
-    .q(a)
-);
+// logic [dec_width-1:0] a;
+// logic [dec_width-1:0] b;
+// logic [dec_width-1:0] one_minus_a;
+// logic [dec_width-1:0] one_minus_b;
+// logic a_reg_en, b_reg_en, one_minus_a_reg_en, one_minus_b_reg_en;
+// vc_EnResetReg#(dec_width) a_reg
+// (
+//     .clk(clk),
+//     .reset(reset),
+//     .en(a_reg_en),
+//     .d(feature_x_dec),
+//     .q(a)
+// );
 
-vc_EnResetReg#(dec_width) b_reg
-(
-    .clk(clk),
-    .reset(reset),
-    .en(b_reg_en),
-    .d(feature_y_dec),
-    .q(b)
-);
+// vc_EnResetReg#(dec_width) b_reg
+// (
+//     .clk(clk),
+//     .reset(reset),
+//     .en(b_reg_en),
+//     .d(feature_y_dec),
+//     .q(b)
+// );
 
-logic [dec_width:0] one_minus_a_reg_in, one_minus_b_reg_in;
-assign one_minus_a_reg_in = {1'b1, {dec_width-1{1'b0}}} - {1'b0, a};
-assign one_minus_b_reg_in = {1'b1, {dec_width-1{1'b0}}} - {1'b0, b};
+// logic [dec_width:0] one_minus_a_reg_in, one_minus_b_reg_in;
+// assign one_minus_a_reg_in = {1'b1, {dec_width-1{1'b0}}} - {1'b0, a};
+// assign one_minus_b_reg_in = {1'b1, {dec_width-1{1'b0}}} - {1'b0, b};
 
-vc_EnResetReg#(dec_width) one_minus_a_reg
-(
-    .clk(clk),
-    .reset(reset),
-    .en(one_minus_a_reg_en),
-    .d(one_minus_a_reg_in[dec_width-1:0]),
-    .q(one_minus_a)
-);
+// vc_EnResetReg#(dec_width) one_minus_a_reg
+// (
+//     .clk(clk),
+//     .reset(reset),
+//     .en(one_minus_a_reg_en),
+//     .d(one_minus_a_reg_in[dec_width-1:0]),
+//     .q(one_minus_a)
+// );
 
-vc_EnResetReg#(dec_width) one_minus_b_reg
-(
-    .clk(clk),
-    .reset(reset),
-    .en(one_minus_b_reg_en),
-    .d(one_minus_b_reg_in[dec_width-1:0]),
-    .q(one_minus_b)
-);
+// vc_EnResetReg#(dec_width) one_minus_b_reg
+// (
+//     .clk(clk),
+//     .reset(reset),
+//     .en(one_minus_b_reg_en),
+//     .d(one_minus_b_reg_in[dec_width-1:0]),
+//     .q(one_minus_b)
+// );
 
-logic mul00_mux_sel, mul01_mux_sel, mul10_mux_sel, mul11_mux_sel;
-logic [dec_width-1:0] mul00_x, mul00_y, mul01_x, mul01_y, mul10_x, mul10_y, mul11_x, mul11_y;
-vc_Mux2 #(dec_width) mul00_mux_x
-(
-    .sel(mul00_mux_sel),
-    .in0(one_minus_a),
-    .in1(iw00),
-    .out(mul00_x)
-);
+// logic mul00_mux_sel, mul01_mux_sel, mul10_mux_sel, mul11_mux_sel;
+// logic [dec_width-1:0] mul00_x, mul00_y, mul01_x, mul01_y, mul10_x, mul10_y, mul11_x, mul11_y;
+// vc_Mux2 #(dec_width) mul00_mux_x
+// (
+//     .sel(mul00_mux_sel),
+//     .in0(one_minus_a),
+//     .in1(iw00),
+//     .out(mul00_x)
+// );
 
-vc_Mux2 #(dec_width) mul00_mux_y
-(
-    .sel(mul00_mux_sel),
-    .in0(one_minus_b),
-    .in1(w00),
-    .out(mul00_y)
-);
+// vc_Mux2 #(dec_width) mul00_mux_y
+// (
+//     .sel(mul00_mux_sel),
+//     .in0(one_minus_b),
+//     .in1(w00),
+//     .out(mul00_y)
+// );
 
-vc_Mux2 #(dec_width) mul01_mux_x
-(
-    .sel(mul01_mux_sel),
-    .in0(a),
-    .in1(iw01),
-    .out(mul01_x)
-);
+// vc_Mux2 #(dec_width) mul01_mux_x
+// (
+//     .sel(mul01_mux_sel),
+//     .in0(a),
+//     .in1(iw01),
+//     .out(mul01_x)
+// );
 
-vc_Mux2 #(dec_width) mul01_mux_y
-(
-    .sel(mul01_mux_sel),
-    .in0(one_minus_b),
-    .in1(w01),
-    .out(mul01_y)
-);
+// vc_Mux2 #(dec_width) mul01_mux_y
+// (
+//     .sel(mul01_mux_sel),
+//     .in0(one_minus_b),
+//     .in1(w01),
+//     .out(mul01_y)
+// );
 
-vc_Mux2 #(dec_width) mul10_mux_x
-(
-    .sel(mul10_mux_sel),
-    .in0(one_minus_a),
-    .in1(iw10),
-    .out(mul10_x)
-);
+// vc_Mux2 #(dec_width) mul10_mux_x
+// (
+//     .sel(mul10_mux_sel),
+//     .in0(one_minus_a),
+//     .in1(iw10),
+//     .out(mul10_x)
+// );
 
-vc_Mux2 #(dec_width) mul10_mux_y
-(
-    .sel(mul10_mux_sel),
-    .in0(b),
-    .in1(w10),
-    .out(mul10_y)
-);
+// vc_Mux2 #(dec_width) mul10_mux_y
+// (
+//     .sel(mul10_mux_sel),
+//     .in0(b),
+//     .in1(w10),
+//     .out(mul10_y)
+// );
 
 logic [mul_width-1:0] mul00;
 logic [mul_width-1:0] mul01;
@@ -245,47 +245,47 @@ multiplier_SimpleMult#(dec_width, pix_width) multiplier11 (
     .p     (mul11)
 );
 
-logic iw00_reg_en, iw01_reg_en, iw10_reg_en, iw11_reg_en;
+// logic iw00_reg_en, iw01_reg_en, iw10_reg_en, iw11_reg_en;
 
-vc_EnResetReg#(dec_width) iw00_reg
-(
-    .clk(clk),
-    .reset(reset),
-    .en(iw00_reg_en),
-    .d(mul00),
-    .q(iw00)
-);
+// vc_EnResetReg#(dec_width) iw00_reg
+// (
+//     .clk(clk),
+//     .reset(reset),
+//     .en(iw00_reg_en),
+//     .d(mul00),
+//     .q(iw00)
+// );
 
-vc_EnResetReg#(dec_width) iw01_reg
-(
-    .clk(clk),
-    .reset(reset),
-    .en(iw01_reg_en),
-    .d(mul01),
-    .q(iw01)
-);
+// vc_EnResetReg#(dec_width) iw01_reg
+// (
+//     .clk(clk),
+//     .reset(reset),
+//     .en(iw01_reg_en),
+//     .d(mul01),
+//     .q(iw01)
+// );
 
-vc_EnResetReg#(dec_width) iw10_reg
-(
-    .clk(clk),
-    .reset(reset),
-    .en(iw10_reg_en),
-    .d(mul10),
-    .q(iw10)
-);
+// vc_EnResetReg#(dec_width) iw10_reg
+// (
+//     .clk(clk),
+//     .reset(reset),
+//     .en(iw10_reg_en),
+//     .d(mul10),
+//     .q(iw10)
+// );
 
-logic [dec_width:0] iw11_reg_in;
-assign iw11_reg_in = ({1'b1, {dec_width-1{1'b0}}} - {1'b1, iw00}) -
-                     ({1'b0, iw10} + {1'b1, iw11})
+// logic [dec_width:0] iw11_reg_in;
+// assign iw11_reg_in = ({1'b1, {dec_width-1{1'b0}}} - {1'b1, iw00}) -
+//                      ({1'b0, iw10} + {1'b1, iw11})
 
-vc_EnResetReg#(dec_width) iw11_reg
-(
-    .clk(clk),
-    .reset(reset),
-    .en(iw11_reg_en),
-    .d(iw11_reg_in[dec_width-1:0]),
-    .q(iw11)
-);
+// vc_EnResetReg#(dec_width) iw11_reg
+// (
+//     .clk(clk),
+//     .reset(reset),
+//     .en(iw11_reg_en),
+//     .d(iw11_reg_in[dec_width-1:0]),
+//     .q(iw11)
+// );
 
 logic [mul_width-1:0] mul00_reg_out;
 logic [mul_width-1:0] mul01_reg_out;
